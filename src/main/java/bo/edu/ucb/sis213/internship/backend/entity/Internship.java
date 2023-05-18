@@ -12,8 +12,9 @@ public class Internship {
     @Column(name = "INTERNSHIP_ID")
     private Long internshipId;
 
-    @Column(name = "COMPANY_ID", nullable = false)
-    private int companyId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_id", nullable = false)
+    private Company companyId;
 
     @Column(name = "TITLE", nullable = false, length = 30)
     private String title;
@@ -49,7 +50,7 @@ public class Internship {
     public Internship() {}
 
     // Constructor con los campos requeridos
-    public Internship(int companyId, String title, String description, Date deadline, Date createDate,
+    public Internship(Company companyId, String title, String description, Date deadline, Date createDate,
                       boolean status, int version, Date txDate, String txUser, String txHost) {
         this.companyId = companyId;
         this.title = title;
@@ -71,11 +72,11 @@ public class Internship {
         this.internshipId = internshipId;
     }
 
-    public int getCompanyId() {
+    public Company getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Company companyId) {
         this.companyId = companyId;
     }
 
